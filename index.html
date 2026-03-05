@@ -515,13 +515,12 @@ async function loadData() {
 }
 
 function loadDemoData() {
-  // Generate demo data matching real column structure
   const labels1 = ['Tech Interviews','Hiring Interviews','Coaching','CTS Talks','PM Associates Monthly Meeting'];
   const results = ['Selected','Rejected','On-hold',null];
   const communities = ['BackEnd & Full Stack','Cloud & DevOps','JavaScript','Mobile','Program Management'];
   const trainingTypes = ['Project Management','AI','Infrastructure','Soft Skills','Python','AWS','React','Azure','GoLang','Java'];
 
-  allItems1 = Array.from({length:120}, (_,i) => ({
+  allItems1 = Array.from({length:120}, (_,idx) => ({
     field_16: labels1[Math.floor(Math.random()*labels1.length)],
     GO_x002f_NOGO: results[Math.floor(Math.random()*results.length)],
     Progress: Math.random()>0.3 ? 'Completed' : 'In progress',
@@ -531,7 +530,7 @@ function loadDemoData() {
     field_8: new Date(2025, Math.floor(Math.random()*6), Math.floor(Math.random()*28)+1).toISOString(),
   }));
 
-  allItems2 = Array.from({length:80}, () => ({
+  allItems2 = Array.from({length:80}, (_,idx) => ({
     Community: communities[Math.floor(Math.random()*communities.length)],
     TrainingType: trainingTypes[Math.floor(Math.random()*trainingTypes.length)],
     Labels: ['Tech Sessions','Mentoring','Training','Interviews'][Math.floor(Math.random()*4)],
@@ -545,7 +544,7 @@ function loadDemoData() {
 
   document.getElementById('authBanner').innerHTML = `
     <div class="auth-banner">
-      <strong>👁️ v.8 Demo mode — showing sample data</strong>
+      <strong>👁️ Version8 Demo mode — showing sample data</strong>
       To see real data, open this dashboard from within your Cognizant SharePoint/Teams environment so the session cookie is available.
       <code>Recommended: Add as a Teams tab → Teams channel → + → SharePoint or Website → paste the hosted URL</code>
     </div>`;
