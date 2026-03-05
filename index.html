@@ -8,98 +8,44 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Segoe UI', sans-serif; background:#f3f4f6; color:#1f2937; }
-
-  header {
-    background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);
-    color: white; padding: 20px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  header { background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); color: white; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
   header h1 { font-size: 1.6rem; font-weight: 700; }
   header .subtitle { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; }
-
-  .filters {
-    background: white; padding: 12px 32px;
-    display: flex; gap: 16px; align-items: center;
-    border-bottom: 1px solid #e5e7eb; flex-wrap: wrap;
-  }
+  .filters { background: white; padding: 12px 32px; display: flex; gap: 16px; align-items: center; border-bottom: 1px solid #e5e7eb; flex-wrap: wrap; }
   .filters label { font-size: 0.82rem; color: #6b7280; font-weight: 600; }
-  .filters select {
-    border: 1px solid #d1d5db; border-radius: 6px;
-    padding: 6px 10px; font-size: 0.85rem; color: #374151;
-    background: #f9fafb; cursor: pointer;
-  }
-  .btn-refresh {
-    margin-left: auto; background: #2d6a9f; color: white;
-    border: none; border-radius: 6px; padding: 7px 18px;
-    font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px;
-  }
+  .filters select { border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font-size: 0.85rem; color: #374151; background: #f9fafb; cursor: pointer; }
+  .btn-refresh { margin-left: auto; background: #2d6a9f; color: white; border: none; border-radius: 6px; padding: 7px 18px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
   .btn-refresh:hover { background: #1e3a5f; }
   .btn-refresh:disabled { background: #9ca3af; cursor: not-allowed; }
-
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px 32px; }
-
-  .card {
-    background: white; border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07); padding: 20px;
-  }
+  .card { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); padding: 20px; }
   .card.span2 { grid-column: span 2; }
   .card.span3 { grid-column: span 3; }
-
-  .card h3 {
-    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;
-    color: #6b7280; margin-bottom: 12px; font-weight: 600;
-  }
-
+  .card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 12px; font-weight: 600; }
   .kpi-row { display: flex; gap: 0; }
-  .kpi {
-    flex: 1; text-align: center; padding: 8px 4px;
-    border-right: 1px solid #f3f4f6;
-  }
+  .kpi { flex: 1; text-align: center; padding: 8px 4px; border-right: 1px solid #f3f4f6; }
   .kpi:last-child { border-right: none; }
   .kpi .val { font-size: 2.4rem; font-weight: 700; line-height: 1; }
   .kpi .lbl { font-size: 0.72rem; color: #6b7280; margin-top: 4px; }
   .kpi.pink .val { color: #ec4899; }
   .kpi.blue .val { color: #2563eb; }
   .kpi.dark .val { color: #1f2937; }
-
   .chart-wrap { position: relative; height: 200px; }
   .chart-wrap.tall { height: 260px; }
-
   .donut-wrap { display: flex; align-items: center; gap: 16px; }
   .donut-wrap .chart-wrap { height: 160px; width: 160px; flex-shrink: 0; }
   .legend { font-size: 0.78rem; }
   .legend-item { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-
-  .loading {
-    display: flex; align-items: center; justify-content: center;
-    height: 100%; min-height: 120px; color: #9ca3af; font-size: 0.85rem;
-    flex-direction: column; gap: 8px;
-  }
-  .spinner {
-    width: 28px; height: 28px; border: 3px solid #e5e7eb;
-    border-top-color: #2d6a9f; border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .loading { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 120px; color: #9ca3af; font-size: 0.85rem; flex-direction: column; gap: 8px; }
+  .spinner { width: 28px; height: 28px; border: 3px solid #e5e7eb; border-top-color: #2d6a9f; border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .error-msg {
-    background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;
-    padding: 12px 16px; color: #dc2626; font-size: 0.82rem; margin: 0 32px 16px;
-  }
+  .error-msg { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 16px; color: #dc2626; font-size: 0.82rem; margin: 0 32px 16px; }
   .error-msg strong { display: block; margin-bottom: 4px; }
-
-  .auth-banner {
-    background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px;
-    padding: 14px 20px; margin: 16px 32px; font-size: 0.85rem; color: #92400e;
-  }
+  .auth-banner { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 14px 20px; margin: 16px 32px; font-size: 0.85rem; color: #92400e; }
   .auth-banner strong { display: block; margin-bottom: 4px; font-size: 0.9rem; }
-  .auth-banner code {
-    display: block; background: #fef3c7; padding: 8px 10px; border-radius: 4px;
-    margin-top: 8px; font-size: 0.78rem; word-break: break-all;
-  }
-
-  .last-updated { font-size: 0.75rem; color: #9ca3af; margin-left: 8px; }
+  .auth-banner code { display: block; background: #fef3c7; padding: 8px 10px; border-radius: 4px; margin-top: 8px; font-size: 0.78rem; word-break: break-all; }
+  .last-updated { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-left: 8px; }
 </style>
 </head>
 <body>
@@ -109,9 +55,7 @@
     <h1>PM Community Metrics</h1>
     <div class="subtitle">Program Management · South Europe · Cognizant</div>
   </div>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <span class="last-updated" id="lastUpdated"></span>
-  </div>
+  <span class="last-updated" id="lastUpdated"></span>
 </header>
 
 <div class="filters">
@@ -130,96 +74,27 @@
     <option value="4">Q4</option>
   </select>
   <label>Community</label>
-  <select id="filterCommunity">
-    <option value="all">All</option>
-  </select>
-  <button class="btn-refresh" id="btnRefresh" onclick="loadData()">
-    <span>↻</span> Refresh
-  </button>
+  <select id="filterCommunity"><option value="all">All</option></select>
+  <button class="btn-refresh" id="btnRefresh" onclick="loadData()">↻ Refresh</button>
 </div>
 
 <div id="authBanner"></div>
 <div id="errorBanner"></div>
 
-<div class="grid" id="dashboard">
-
-  <!-- KPIs -->
-  <div class="card span3">
-    <h3>Interview & Activity Summary</h3>
-    <div class="kpi-row" id="kpiRow">
-      <div class="loading"><div class="spinner"></div><span>Loading…</span></div>
-    </div>
-  </div>
-
-  <!-- Interview result breakdown -->
-  <div class="card span2">
-    <h3>Interview Results by Label</h3>
-    <div class="chart-wrap tall" id="barInterviewWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Coaching sessions -->
-  <div class="card">
-    <h3>Coaching Sessions</h3>
-    <div class="donut-wrap" id="coachingWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Tech Interviews monthly -->
-  <div class="card">
-    <h3>Tech Interviews (monthly)</h3>
-    <div class="chart-wrap" id="techMonthlyWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Hiring Interviews monthly -->
-  <div class="card">
-    <h3>Hiring Interviews (monthly)</h3>
-    <div class="chart-wrap" id="hiringMonthlyWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Attendance -->
-  <div class="card">
-    <h3>PM Associates Meeting Attendance</h3>
-    <div class="chart-wrap" id="attendanceWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Training by Type & Community -->
-  <div class="card span3">
-    <h3>Training Type by Community (Bench Activities)</h3>
-    <div class="chart-wrap tall" id="trainingWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Bench status -->
-  <div class="card">
-    <h3>Bench Status</h3>
-    <div class="donut-wrap" id="benchWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
-  <!-- Activity Group -->
-  <div class="card span2">
-    <h3>Activity Group Distribution</h3>
-    <div class="chart-wrap" id="activityWrap">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
-  </div>
-
+<div class="grid">
+  <div class="card span3"><h3>Interview & Activity Summary</h3><div class="kpi-row" id="kpiRow"><div class="loading"><div class="spinner"></div><span>Loading…</span></div></div></div>
+  <div class="card span2"><h3>Interview Results by Label</h3><div class="chart-wrap tall" id="barInterviewWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card"><h3>Coaching Sessions</h3><div class="donut-wrap" id="coachingWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card"><h3>Tech Interviews (monthly)</h3><div class="chart-wrap" id="techMonthlyWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card"><h3>Hiring Interviews (monthly)</h3><div class="chart-wrap" id="hiringMonthlyWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card"><h3>PM Associates Meeting Attendance</h3><div class="chart-wrap" id="attendanceWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card span3"><h3>Training Type by Community</h3><div class="chart-wrap tall" id="trainingWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card"><h3>Bench Status</h3><div class="donut-wrap" id="benchWrap"><div class="loading"><div class="spinner"></div></div></div></div>
+  <div class="card span2"><h3>Activity Group Distribution</h3><div class="chart-wrap" id="activityWrap"><div class="loading"><div class="spinner"></div></div></div></div>
 </div>
 
 <script>
 const FLOW_URL = 'https://defaultde08c40719b9427d9fe8edf254300c.a7.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1fe27b4e7298454392513e7e096d674e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=g5_C9qTPOEjqGtmr0XkrtoPjL8XcEyp43z2HqCVY4HE';
-
 const COLORS = ['#2563eb','#ec4899','#8b5cf6','#f59e0b','#10b981','#ef4444','#06b6d4','#f97316','#84cc16','#6366f1'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -227,35 +102,26 @@ let charts = {};
 let allItems1 = [], allItems2 = [];
 
 function showError(msg) {
-  document.getElementById('errorBanner').innerHTML =
-    `<div class="error-msg"><strong>Error loading data</strong>${msg}</div>`;
+  document.getElementById('errorBanner').innerHTML = `<div class="error-msg"><strong>Error loading data</strong>${msg}</div>`;
 }
 function clearError() {
   document.getElementById('errorBanner').innerHTML = '';
   document.getElementById('authBanner').innerHTML = '';
 }
 
-async function fetchAll() {
+async function fetchData() {
   const r = await fetch(FLOW_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({})
   });
   if (r.status === 401 || r.status === 403) {
-    document.getElementById('authBanner').innerHTML = `
-      <div class="auth-banner">
-        <strong>⚠️ Authentication required</strong>
-        Abre este dashboard desde dentro de SharePoint/Teams con tu sesión Cognizant activa.
-        <code>Teams → + Añadir pestaña → Sitio web → pega la URL del archivo</code>
-      </div>`;
+    document.getElementById('authBanner').innerHTML = `<div class="auth-banner"><strong>⚠️ Authentication required</strong>Abre este dashboard desde dentro de SharePoint/Teams con tu sesión Cognizant activa.<code>Teams → + Añadir pestaña → Sitio web → pega la URL</code></div>`;
     throw new Error('Auth required');
   }
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
   const data = await r.json();
-  return {
-    community: data.community || [],
-    bench: data.bench || []
-  };
+  return { community: data.community || [], bench: data.bench || [] };
 }
 
 function getFilters() {
@@ -270,23 +136,20 @@ function inPeriod(dateStr, year, quarter) {
   if (!dateStr) return false;
   const d = new Date(dateStr);
   if (year !== 'all' && d.getFullYear() !== parseInt(year)) return false;
-  if (quarter !== 'all') {
-    const q = Math.ceil((d.getMonth() + 1) / 3);
-    if (q !== parseInt(quarter)) return false;
-  }
+  if (quarter !== 'all' && Math.ceil((d.getMonth()+1)/3) !== parseInt(quarter)) return false;
   return true;
 }
 
-function filterItems1(items) {
-  const { year, quarter } = getFilters();
-  return items.filter(i => inPeriod(i.field_7 || i.field_8, year, quarter));
+function filterItems1() {
+  const {year, quarter} = getFilters();
+  return allItems1.filter(function(item) { return inPeriod(item.field_7 || item.field_8, year, quarter); });
 }
 
-function filterItems2(items) {
-  const { year, quarter, community } = getFilters();
-  return items.filter(i => {
-    if (!inPeriod(i.field_7, year, quarter)) return false;
-    if (community !== 'all' && i.Community !== community) return false;
+function filterItems2() {
+  const {year, quarter, community} = getFilters();
+  return allItems2.filter(function(item) {
+    if (!inPeriod(item.field_7, year, quarter)) return false;
+    if (community !== 'all' && item.Community !== community) return false;
     return true;
   });
 }
@@ -295,265 +158,226 @@ function destroyChart(id) {
   if (charts[id]) { charts[id].destroy(); delete charts[id]; }
 }
 
-function renderKPIs(items1, items2) {
-  const techTotal = items1.filter(i => i.field_16 === 'Tech Interviews').length;
-  const hiringTotal = items1.filter(i => i.field_16 === 'Hiring Interviews').length;
-  const ctsTalks = items1.filter(i => i.field_16 === 'CTS Talks').length;
-  const coaching = items1.filter(i => i.field_16 === 'Coaching').length;
-  const benchCount = items2.filter(i => i.InBench === 'Yes' || i.InBench === 'yes').length;
-
-  document.getElementById('kpiRow').innerHTML = `
-    <div class="kpi pink"><div class="val">${techTotal}</div><div class="lbl">Tech Interviews</div></div>
-    <div class="kpi pink"><div class="val">${hiringTotal}</div><div class="lbl">Hiring Interviews</div></div>
-    <div class="kpi dark"><div class="val">${ctsTalks}</div><div class="lbl">CTS Talks</div></div>
-    <div class="kpi blue"><div class="val">${coaching}</div><div class="lbl">Coaching Sessions</div></div>
-    <div class="kpi blue"><div class="val">${benchCount}</div><div class="lbl">People in Bench</div></div>
-  `;
+function renderKPIs(f1, f2) {
+  var tech = f1.filter(function(x){return x.field_16==='Tech Interviews';}).length;
+  var hiring = f1.filter(function(x){return x.field_16==='Hiring Interviews';}).length;
+  var cts = f1.filter(function(x){return x.field_16==='CTS Talks';}).length;
+  var coaching = f1.filter(function(x){return x.field_16==='Coaching';}).length;
+  var bench = f2.filter(function(x){return x.InBench==='Yes'||x.InBench==='yes';}).length;
+  document.getElementById('kpiRow').innerHTML =
+    '<div class="kpi pink"><div class="val">'+tech+'</div><div class="lbl">Tech Interviews</div></div>'+
+    '<div class="kpi pink"><div class="val">'+hiring+'</div><div class="lbl">Hiring Interviews</div></div>'+
+    '<div class="kpi dark"><div class="val">'+cts+'</div><div class="lbl">CTS Talks</div></div>'+
+    '<div class="kpi blue"><div class="val">'+coaching+'</div><div class="lbl">Coaching Sessions</div></div>'+
+    '<div class="kpi blue"><div class="val">'+bench+'</div><div class="lbl">People in Bench</div></div>';
 }
 
-function renderInterviewBar(items) {
-  const wrap = document.getElementById('barInterviewWrap');
-  wrap.innerHTML = '<canvas id="cInterviewBar"></canvas>';
+function renderInterviewBar(f1) {
+  document.getElementById('barInterviewWrap').innerHTML = '<canvas id="cInterviewBar"></canvas>';
   destroyChart('interviewBar');
-
-  const labels = ['Tech Interviews', 'Hiring Interviews'];
-  const results = ['Selected', 'Rejected', 'On-hold', 'En blanco'];
-  const colors = ['#2563eb', '#ef4444', '#93c5fd', '#d1d5db'];
-
-  const datasets = results.map((r, ri) => ({
-    label: r,
-    data: labels.map(lbl => items.filter(i => i.field_16 === lbl && (i.GO_x002f_NOGO === r || (!i.GO_x002f_NOGO && r === 'En blanco'))).length),
-    backgroundColor: colors[ri],
-    borderRadius: 4
-  }));
-
+  var labels = ['Tech Interviews','Hiring Interviews'];
+  var results = ['Selected','Rejected','On-hold','En blanco'];
+  var colors = ['#2563eb','#ef4444','#93c5fd','#d1d5db'];
+  var datasets = results.map(function(res, ri) {
+    return {
+      label: res,
+      data: labels.map(function(lbl) {
+        return f1.filter(function(x) { return x.field_16===lbl && (x.GO_x002f_NOGO===res || (!x.GO_x002f_NOGO && res==='En blanco')); }).length;
+      }),
+      backgroundColor: colors[ri],
+      borderRadius: 4
+    };
+  });
   charts['interviewBar'] = new Chart(document.getElementById('cInterviewBar'), {
     type: 'bar',
-    data: { labels, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
-      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
-    }
+    data: { labels: labels, datasets: datasets },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}, scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}} }
   });
 }
 
-function renderDonut(canvasId, wrapId, dataMap, title) {
-  const wrap = document.getElementById(wrapId);
-  const entries = Object.entries(dataMap).filter(([,v]) => v > 0);
+function renderDonut(canvasId, wrapId, dataMap) {
+  var wrap = document.getElementById(wrapId);
+  var entries = Object.entries(dataMap).filter(function(e){return e[1]>0;});
   if (!entries.length) { wrap.innerHTML = '<div class="loading"><span>No data</span></div>'; return; }
-
-  const lbls = entries.map(([k]) => k);
-  const vals = entries.map(([,v]) => v);
-  wrap.innerHTML = `<div class="chart-wrap" style="height:160px;width:160px;flex-shrink:0"><canvas id="${canvasId}"></canvas></div>
-    <div class="legend">${lbls.map((l,i) => `<div class="legend-item"><div class="legend-dot" style="background:${COLORS[i%COLORS.length]}"></div><span>${l}: <strong>${vals[i]}</strong></span></div>`).join('')}</div>`;
+  var lbls = entries.map(function(e){return e[0];});
+  var vals = entries.map(function(e){return e[1];});
+  wrap.innerHTML = '<div class="chart-wrap" style="height:160px;width:160px;flex-shrink:0"><canvas id="'+canvasId+'"></canvas></div><div class="legend">'+
+    lbls.map(function(l,ci){return '<div class="legend-item"><div class="legend-dot" style="background:'+COLORS[ci%COLORS.length]+'"></div><span>'+l+': <strong>'+vals[ci]+'</strong></span></div>';}).join('')+'</div>';
   destroyChart(canvasId);
   charts[canvasId] = new Chart(document.getElementById(canvasId), {
     type: 'doughnut',
-    data: { labels: lbls, datasets: [{ data: vals, backgroundColor: COLORS.slice(0, lbls.length), borderWidth: 2 }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    data: { labels: lbls, datasets: [{data: vals, backgroundColor: COLORS.slice(0,lbls.length), borderWidth:2}] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
   });
 }
 
-function renderMonthlyBar(wrapId, canvasId, items, label) {
-  const wrap = document.getElementById(wrapId);
-  wrap.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+function renderMonthlyBar(wrapId, canvasId, f1, label) {
+  document.getElementById(wrapId).innerHTML = '<canvas id="'+canvasId+'"></canvas>';
   destroyChart(canvasId);
-
-  const counts = Array(12).fill(0);
-  items.filter(i => i.field_16 === label).forEach(i => {
-    const d = new Date(i.field_7 || i.field_8);
+  var counts = Array(12).fill(0);
+  f1.filter(function(x){return x.field_16===label;}).forEach(function(x) {
+    var d = new Date(x.field_7||x.field_8);
     if (!isNaN(d)) counts[d.getMonth()]++;
   });
-
   charts[canvasId] = new Chart(document.getElementById(canvasId), {
     type: 'bar',
-    data: {
-      labels: MONTHS,
-      datasets: [{ label: 'Count', data: counts, backgroundColor: '#2563eb', borderRadius: 4 }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
-    }
+    data: { labels: MONTHS, datasets: [{label:'Count', data:counts, backgroundColor:'#2563eb', borderRadius:4}] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
   });
 }
 
-function renderAttendance(items) {
-  const wrap = document.getElementById('attendanceWrap');
-  wrap.innerHTML = '<canvas id="cAttendance"></canvas>';
+function renderAttendance(f1) {
+  document.getElementById('attendanceWrap').innerHTML = '<canvas id="cAttendance"></canvas>';
   destroyChart('attendance');
-
-  const byMonth = {};
-  items.filter(i => i.Attendance != null).forEach(i => {
-    const d = new Date(i.field_7 || i.field_8);
+  var byMonth = {};
+  f1.filter(function(x){return x.Attendance!=null;}).forEach(function(x) {
+    var d = new Date(x.field_7||x.field_8);
     if (isNaN(d)) return;
-    const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-    if (!byMonth[k]) byMonth[k] = { att: 0, tgt: 0, n: 0 };
-    byMonth[k].att += i.Attendance || 0;
-    byMonth[k].tgt += i.TargetAttendance || 0;
-    byMonth[k].n++;
+    var k = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    if (!byMonth[k]) byMonth[k] = {att:0,tgt:0};
+    byMonth[k].att += x.Attendance||0;
+    byMonth[k].tgt += x.TargetAttendance||0;
   });
-
-  const sorted = Object.keys(byMonth).sort();
-  const lbl = sorted.map(k => { const [y,m] = k.split('-'); return `${MONTHS[parseInt(m)-1]} ${y}`; });
-
+  var sorted = Object.keys(byMonth).sort();
+  var lbl = sorted.map(function(k){var p=k.split('-');return MONTHS[parseInt(p[1])-1]+' '+p[0];});
   charts['attendance'] = new Chart(document.getElementById('cAttendance'), {
     type: 'line',
-    data: {
-      labels: lbl,
-      datasets: [
-        { label: 'Attendance', data: sorted.map(k => byMonth[k].att), borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.1)', tension: 0.3, fill: true },
-        { label: 'Target', data: sorted.map(k => byMonth[k].tgt), borderColor: '#1f2937', borderDash: [4,4], tension: 0.3, fill: false }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
-      scales: { y: { beginAtZero: false } }
-    }
+    data: { labels: lbl, datasets: [
+      {label:'Attendance', data:sorted.map(function(k){return byMonth[k].att;}), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, fill:true},
+      {label:'Target', data:sorted.map(function(k){return byMonth[k].tgt;}), borderColor:'#1f2937', borderDash:[4,4], tension:0.3, fill:false}
+    ]},
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}, scales:{y:{beginAtZero:false}} }
   });
 }
 
-function renderTraining(items) {
-  const wrap = document.getElementById('trainingWrap');
-  wrap.innerHTML = '<canvas id="cTraining"></canvas>';
+function renderTraining(f2) {
+  document.getElementById('trainingWrap').innerHTML = '<canvas id="cTraining"></canvas>';
   destroyChart('training');
-
-  const communities = [...new Set(items.map(i => i.Community).filter(Boolean))].sort();
-  const types = [...new Set(items.map(i => i.TrainingType).filter(Boolean))].sort();
-
-  // Count per type
-  const totals = types.map(t => items.filter(i => i.TrainingType === t).length);
-  const sortedIdx = totals.map((_,i)=>i).sort((a,b)=>totals[b]-totals[a]).slice(0,15);
-  const topTypes = sortedIdx.map(i => types[i]);
-
-  const datasets = communities.map((c, ci) => ({
-    label: c,
-    data: topTypes.map(t => items.filter(i => i.Community === c && i.TrainingType === t).length),
-    backgroundColor: COLORS[ci % COLORS.length],
-    borderRadius: 2
-  }));
-
+  var communities = [];
+  var types = [];
+  f2.forEach(function(x) {
+    if (x.Community && communities.indexOf(x.Community)===-1) communities.push(x.Community);
+    if (x.TrainingType && types.indexOf(x.TrainingType)===-1) types.push(x.TrainingType);
+  });
+  communities.sort(); types.sort();
+  var totals = types.map(function(t){return f2.filter(function(x){return x.TrainingType===t;}).length;});
+  var sortedIdx = totals.map(function(_,n){return n;}).sort(function(a,b){return totals[b]-totals[a];}).slice(0,15);
+  var topTypes = sortedIdx.map(function(n){return types[n];});
+  var datasets = communities.map(function(c, ci) {
+    return {
+      label: c,
+      data: topTypes.map(function(t){return f2.filter(function(x){return x.Community===c&&x.TrainingType===t;}).length;}),
+      backgroundColor: COLORS[ci%COLORS.length],
+      borderRadius: 2
+    };
+  });
   charts['training'] = new Chart(document.getElementById('cTraining'), {
     type: 'bar',
-    data: { labels: topTypes, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } },
-      scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true } }
-    }
+    data: { labels: topTypes, datasets: datasets },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{font:{size:10}}}}, scales:{x:{stacked:true,ticks:{font:{size:10}}},y:{stacked:true,beginAtZero:true}} }
   });
 }
 
 function populateCommunityFilter(items) {
-  const sel = document.getElementById('filterCommunity');
-  const current = sel.value;
-  const communities = [...new Set(items.map(i => i.Community).filter(Boolean))].sort();
-  sel.innerHTML = '<option value="all">All</option>' +
-    communities.map(c => `<option value="${c}"${c===current?' selected':''}>${c}</option>`).join('');
+  var sel = document.getElementById('filterCommunity');
+  var current = sel.value;
+  var communities = [];
+  items.forEach(function(x){if(x.Community&&communities.indexOf(x.Community)===-1)communities.push(x.Community);});
+  communities.sort();
+  sel.innerHTML = '<option value="all">All</option>'+communities.map(function(c){return '<option value="'+c+'"'+(c===current?' selected':'')+'>'+c+'</option>';}).join('');
 }
 
 function renderAll() {
-  const f1 = filterItems1(allItems1);
-  const f2 = filterItems2(allItems2);
-
+  var f1 = filterItems1();
+  var f2 = filterItems2();
   renderKPIs(f1, f2);
   renderInterviewBar(f1);
-  renderDonut('cCoaching', 'coachingWrap',
-    Object.fromEntries([...new Set(f1.filter(i=>i.field_16==='Coaching').map(i=>i.Progress||'Unknown'))].map(s=>[s, f1.filter(i=>i.field_16==='Coaching'&&(i.Progress||'Unknown')===s).length])));
-  renderMonthlyBar('techMonthlyWrap', 'cTech', f1, 'Tech Interviews');
-  renderMonthlyBar('hiringMonthlyWrap', 'cHiring', f1, 'Hiring Interviews');
+
+  var coachingMap = {};
+  f1.filter(function(x){return x.field_16==='Coaching';}).forEach(function(x){var k=x.Progress||'Unknown';coachingMap[k]=(coachingMap[k]||0)+1;});
+  renderDonut('cCoaching','coachingWrap',coachingMap);
+
+  renderMonthlyBar('techMonthlyWrap','cTech',f1,'Tech Interviews');
+  renderMonthlyBar('hiringMonthlyWrap','cHiring',f1,'Hiring Interviews');
   renderAttendance(f1);
   renderTraining(f2);
 
-  const benchMap = {};
-  f2.forEach(i => { const k = i.InBench || 'Unknown'; benchMap[k] = (benchMap[k]||0)+1; });
-  renderDonut('cBench', 'benchWrap', benchMap);
+  var benchMap = {};
+  f2.forEach(function(x){var k=x.InBench||'Unknown';benchMap[k]=(benchMap[k]||0)+1;});
+  renderDonut('cBench','benchWrap',benchMap);
 
-  const actMap = {};
-  f2.forEach(i => { const k = i.Labels || 'Unknown'; actMap[k] = (actMap[k]||0)+1; });
-  const wrap = document.getElementById('activityWrap');
-  wrap.innerHTML = '<canvas id="cActivity"></canvas>';
+  var actMap = {};
+  f2.forEach(function(x){var k=x.Labels||'Unknown';actMap[k]=(actMap[k]||0)+1;});
+  document.getElementById('activityWrap').innerHTML = '<canvas id="cActivity"></canvas>';
   destroyChart('activity');
-  const aEntries = Object.entries(actMap).sort((a,b)=>b[1]-a[1]);
+  var aEntries = Object.entries(actMap).sort(function(a,b){return b[1]-a[1];});
   charts['activity'] = new Chart(document.getElementById('cActivity'), {
     type: 'bar',
-    data: {
-      labels: aEntries.map(([k])=>k),
-      datasets: [{ data: aEntries.map(([,v])=>v), backgroundColor: COLORS, borderRadius: 4 }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-      plugins: { legend: { display: false } },
-      scales: { x: { beginAtZero: true } }
-    }
+    data: { labels: aEntries.map(function(e){return e[0];}), datasets: [{data:aEntries.map(function(e){return e[1];}),backgroundColor:COLORS,borderRadius:4}] },
+    options: { responsive:true, maintainAspectRatio:false, indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true}} }
   });
 
-  document.getElementById('lastUpdated').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+  document.getElementById('lastUpdated').textContent = 'Updated: '+new Date().toLocaleTimeString();
+}
+
+function loadDemoData() {
+  var labels1 = ['Tech Interviews','Hiring Interviews','Coaching','CTS Talks','PM Associates Monthly Meeting'];
+  var results = ['Selected','Rejected','On-hold',null];
+  var communities = ['BackEnd & Full Stack','Cloud & DevOps','JavaScript','Mobile','Program Management'];
+  var trainingTypes = ['Project Management','AI','Infrastructure','Soft Skills','Python','AWS','React','Azure','GoLang','Java'];
+
+  allItems1 = [];
+  for (var a=0; a<120; a++) {
+    allItems1.push({
+      field_16: labels1[Math.floor(Math.random()*labels1.length)],
+      GO_x002f_NOGO: results[Math.floor(Math.random()*results.length)],
+      Progress: Math.random()>0.3 ? 'Completed' : 'In progress',
+      Attendance: 15+Math.floor(Math.random()*10),
+      TargetAttendance: 22,
+      field_7: new Date(2025,Math.floor(Math.random()*6),Math.floor(Math.random()*28)+1).toISOString(),
+      field_8: new Date(2025,Math.floor(Math.random()*6),Math.floor(Math.random()*28)+1).toISOString()
+    });
+  }
+
+  allItems2 = [];
+  for (var b=0; b<80; b++) {
+    allItems2.push({
+      Community: communities[Math.floor(Math.random()*communities.length)],
+      TrainingType: trainingTypes[Math.floor(Math.random()*trainingTypes.length)],
+      Labels: ['Tech Sessions','Mentoring','Training','Interviews'][Math.floor(Math.random()*4)],
+      InBench: Math.random()>0.4 ? 'Yes' : 'No',
+      Progress: Math.random()>0.5 ? 'Completed' : 'In progress',
+      field_7: new Date(2025,Math.floor(Math.random()*3),Math.floor(Math.random()*28)+1).toISOString()
+    });
+  }
+
+  populateCommunityFilter(allItems2);
+  renderAll();
+
+  document.getElementById('authBanner').innerHTML = '<div class="auth-banner"><strong>👁️ Demo mode — showing sample data</strong>Para ver datos reales, abre este dashboard desde tu entorno Cognizant SharePoint/Teams.<code>Recomendado: añadir como pestaña en Teams → canal → + → Website → pega la URL</code></div>';
 }
 
 async function loadData() {
   clearError();
-  const btn = document.getElementById('btnRefresh');
+  var btn = document.getElementById('btnRefresh');
   btn.disabled = true; btn.textContent = '↻ Loading…';
-
   try {
-    const { community, bench } = await fetchAll();
-    allItems1 = community;
-    allItems2 = bench;
-    populateCommunityFilter(i2);
+    var result = await fetchData();
+    allItems1 = result.community || [];
+    allItems2 = result.bench || [];
+    populateCommunityFilter(allItems2);
     renderAll();
   } catch(e) {
-    if (e.message !== 'Auth required') showError(` — ${e.message}`);
-    // Show demo data so the layout is visible
+    if (e.message !== 'Auth required') showError(' — ' + e.message);
     loadDemoData();
   } finally {
     btn.disabled = false; btn.textContent = '↻ Refresh';
   }
 }
 
-function loadDemoData() {
-  const labels1 = ['Tech Interviews','Hiring Interviews','Coaching','CTS Talks','PM Associates Monthly Meeting'];
-  const results = ['Selected','Rejected','On-hold',null];
-  const communities = ['BackEnd & Full Stack','Cloud & DevOps','JavaScript','Mobile','Program Management'];
-  const trainingTypes = ['Project Management','AI','Infrastructure','Soft Skills','Python','AWS','React','Azure','GoLang','Java'];
-
-  allItems1 = Array.from({length:120}, (_,idx) => ({
-    field_16: labels1[Math.floor(Math.random()*labels1.length)],
-    GO_x002f_NOGO: results[Math.floor(Math.random()*results.length)],
-    Progress: Math.random()>0.3 ? 'Completed' : 'In progress',
-    Attendance: 15+Math.floor(Math.random()*10),
-    TargetAttendance: 22,
-    field_7: new Date(2025, Math.floor(Math.random()*6), Math.floor(Math.random()*28)+1).toISOString(),
-    field_8: new Date(2025, Math.floor(Math.random()*6), Math.floor(Math.random()*28)+1).toISOString(),
-  }));
-
-  allItems2 = Array.from({length:80}, (_,idx) => ({
-    Community: communities[Math.floor(Math.random()*communities.length)],
-    TrainingType: trainingTypes[Math.floor(Math.random()*trainingTypes.length)],
-    Labels: ['Tech Sessions','Mentoring','Training','Interviews'][Math.floor(Math.random()*4)],
-    InBench: Math.random()>0.4 ? 'Yes' : 'No',
-    Progress: Math.random()>0.5 ? 'Completed' : 'In progress',
-    field_7: new Date(2025, Math.floor(Math.random()*3), Math.floor(Math.random()*28)+1).toISOString(),
-  }));
-
-  populateCommunityFilter(allItems2);
-  renderAll();
-
-  document.getElementById('authBanner').innerHTML = `
-    <div class="auth-banner">
-      <strong>👁️ Version8 Demo mode — showing sample data</strong>
-      To see real data, open this dashboard from within your Cognizant SharePoint/Teams environment so the session cookie is available.
-      <code>Recommended: Add as a Teams tab → Teams channel → + → SharePoint or Website → paste the hosted URL</code>
-    </div>`;
-}
-
-// Wire up filters
-['filterYear','filterQuarter','filterCommunity'].forEach(id =>
-  document.getElementById(id).addEventListener('change', renderAll)
-);
+['filterYear','filterQuarter','filterCommunity'].forEach(function(id){
+  document.getElementById(id).addEventListener('change', renderAll);
+});
 
 loadData();
 </script>
